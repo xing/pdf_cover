@@ -1,7 +1,7 @@
 # coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'xing/pdf_cover/version'
+require "xing/pdf_cover/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "xing-pdf_cover"
@@ -9,18 +9,13 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Juan González"]
   spec.email         = ["juan.gonzalez@xing.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %(Convert first page of a PDF into an image format on Carrierwave and Paperclip )
+  spec.description   = %(Provides processors for both Carrierwave and Paperclip to allow
+                         having a version of a PDF attachment that is actually an image
+                         representing the first page on that PDF. This gem uses GhostScript,
+                         so it must be installed in order for it to work.)
+  spec.homepage      = "http://source.xing.com/gems/xing-pdf_cover"
   spec.license       = "MIT"
-
-  # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
-  # delete this section to allow pushing this gem to any host.
-  if spec.respond_to?(:metadata)
-    spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
-  else
-    raise "RubyGems 2.0 or newer is required to protect against public gem pushes."
-  end
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"
@@ -30,4 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.11"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "rubocop", "~> 0.34.1"
 end
