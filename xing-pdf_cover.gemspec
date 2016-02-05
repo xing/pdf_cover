@@ -29,5 +29,11 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rubocop", "~> 0.34.1"
   spec.add_development_dependency "sqlite3"
 
+  spec.add_development_dependency "byebug"
+  spec.add_development_dependency "fivemat"
+
+  spec.add_development_dependency "paperclip", "=4.1.1"
+  spec.add_development_dependency "carrierwave", "~> 0.10"
+
   spec.add_runtime_dependency "rails", "~> 4.2.5"
 end
