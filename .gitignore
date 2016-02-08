@@ -9,3 +9,4 @@
 /tmp/
 /vendor/bundle
 .byebug_history
+.DS_Store
