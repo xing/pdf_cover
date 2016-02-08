@@ -1,5 +1,4 @@
 require "digest/md5"
-require "RMagick"
 
 require "spec_helper"
 require "xing/pdf_cover/converter"
@@ -38,8 +37,9 @@ describe Xing::PdfCover::Converter do
           let(:execution_result) { false }
           let(:logger) { double(Logger) }
 
+          const_set(:CHILD_STATUS, "something went wrong")
+
           before do
-            $CHILD_STATUS = "something went wrong"
             expect(subject).to receive(:logger).and_return(logger)
             expect(logger).to receive(:warn)
           end
