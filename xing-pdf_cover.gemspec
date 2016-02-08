@@ -36,5 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "paperclip", "=4.1.1"
   spec.add_development_dependency "carrierwave", "~> 0.10"
 
+  spec.add_development_dependency "rmagick", "~> 2.13.2"
+
   spec.add_runtime_dependency "rails", "~> 4.2.5"
 end
