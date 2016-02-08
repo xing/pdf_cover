@@ -1,5 +1,9 @@
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
 
+# Code coverage
+require "simplecov"
+SimpleCov.start
+
 # Development dependencies
 require "byebug"
 require "paperclip"
