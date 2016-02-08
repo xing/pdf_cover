@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160208113615) do
+ActiveRecord::Schema.define(version: 20160208154250) do
+
+  create_table "with_carrierwaves", force: :cascade do |t|
+    t.string "pdf"
+  end
 
   create_table "with_paperclips", force: :cascade do |t|
     t.string   "pdf_file_name"
