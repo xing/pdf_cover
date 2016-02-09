@@ -3,7 +3,8 @@ require "rspec/core/rake_task"
 require "rubocop/rake_task"
 
 RSpec::Core::RakeTask.new(:spec).tap do |rspec_task|
-  rspec_task.rspec_opts = "--tag ~slow" unless ENV["RUN_SLOW_SPECS"]
+  rspec_task.rspec_opts = "--fail-fast"
+  rspec_task.rspec_opts += " --tag ~slow" unless ENV["RUN_SLOW_SPECS"]
 end
 
 RuboCop::RakeTask.new(:rubocop)
