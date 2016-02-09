@@ -2,6 +2,8 @@ require "bundler/gem_tasks"
 require "rspec/core/rake_task"
 require "rubocop/rake_task"
 
+ENV["RAILS_ENV"] ||= "test"
+
 RSpec::Core::RakeTask.new(:spec).tap do |rspec_task|
   rspec_task.rspec_opts = "--fail-fast"
   rspec_task.rspec_opts += " --tag ~slow" unless ENV["RUN_SLOW_SPECS"]
