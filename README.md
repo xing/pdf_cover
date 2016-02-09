@@ -18,6 +18,10 @@ class WithPaperclip < ActiveRecord::Base
 end
 ```
 
+The relevant part here is just the `processors: %i(pdf_cover)` which tells Paperclip
+to apply the processor provided by this gem on the given attachment. The rest
+of this class can be understood by checking Paperclip's documentation.
+
 ## CarrierWave
 
 When using CarrierWave you can implement this gem's functionality
@@ -34,3 +38,7 @@ class WithCarrierwaveUploader < CarrierWave::Uploader::Base
   end
 end
 ```
+
+In this case, when we mix the `Xing::PdfCover` module in, it adds the `pdf_cover`
+method to out uploader, which is then executed automatically on save thanks to the
+`process :pdf_cover` line, the rest is just your common CarrierWave boilerplate.
