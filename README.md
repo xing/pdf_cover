@@ -42,3 +42,12 @@ end
 In this case, when we mix the `Xing::PdfCover` module in, it adds the `pdf_cover_processor!`
 method to our uploader. We only need to call it inside one of our versions to get the
 pdf to image feature.
+
+# Developing this gem
+
+After cloning this gem locally just run the `bin/setup` script to set everything
+up. This will:
+
+- Run bundle to install development dependencies
+- Initialize the database used by the `spec/dummy` rails application that
+we use to test the ActiveRecord+(Paperclip|CarrierWave) integration.
