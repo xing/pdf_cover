@@ -34,11 +34,11 @@ class WithCarrierwaveUploader < CarrierWave::Uploader::Base
   storage :file
 
   version :image do
-    process :pdf_cover
+    pdf_cover_processor!
   end
 end
 ```
 
-In this case, when we mix the `Xing::PdfCover` module in, it adds the `pdf_cover`
-method to out uploader, which is then executed automatically on save thanks to the
-`process :pdf_cover` line, the rest is just your common CarrierWave boilerplate.
+In this case, when we mix the `Xing::PdfCover` module in, it adds the `pdf_cover_processor!`
+method to our uploader. We only need to call it inside one of our versions to get the
+pdf to image feature.
