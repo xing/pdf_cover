@@ -12,15 +12,15 @@ To add a PDF cover style to your attachments you can do something like this:
 
 ```Ruby
 class WithPaperclip < ActiveRecord::Base
-  has_attached_file :pdf, styles: { pdf_cover: {} }, processors: %i(pdf_cover)
+  include Xing::PdfCover
 
-  validates_attachment_content_type :pdf, content_type: %w(application/pdf)
+  pdf_cover_attachment :pdf
 end
 ```
 
-The relevant part here is just the `processors: %i(pdf_cover)` which tells Paperclip
-to apply the processor provided by this gem on the given attachment. The rest
-of this class can be understood by checking Paperclip's documentation.
+This will define an attachment called `pdf` which has a `pdf_cover` style attached
+to it that is a JPEG of the first page in the PDF. You can pass another format
+as the second argument to the `pdf_cover_attachment` call (i.e. :png).
 
 ## CarrierWave
 
@@ -34,12 +34,12 @@ class WithCarrierwaveUploader < CarrierWave::Uploader::Base
   storage :file
 
   version :image do
-    pdf_cover_processor!
+    pdf_cover_attachment
   end
 end
 ```
 
-In this case, when we mix the `Xing::PdfCover` module in, it adds the `pdf_cover_processor!`
+In this case, when we mix the `Xing::PdfCover` module in, it adds the `pdf_cover_attachment`
 method to our uploader. We only need to call it inside one of our versions to get the
 pdf to image feature.
 

@@ -2,7 +2,7 @@ require "spec_helper"
 require File.expand_path("../../dummy/config/environment.rb", __FILE__)
 
 describe WithCarrierwave do
-  context "attachment post processing", slow: true do
+  context "attachment post processing" do
     let(:base_pdf_name) { "spec/test_pdfs/Test" }
 
     let(:pdf_cover) { Magick::Image.read(pdf_cover_path).first }

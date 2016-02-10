@@ -4,6 +4,6 @@ class WithCarrierwaveUploader < CarrierWave::Uploader::Base
   storage :file
 
   version :image do
-    pdf_cover_processor!
+    pdf_cover_attachment
   end
 end
