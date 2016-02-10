@@ -1,4 +1,5 @@
 require "spec_helper"
+require "rmagick"
 require File.expand_path("../../dummy/config/environment.rb", __FILE__)
 
 describe WithPaperclip do
@@ -21,6 +22,7 @@ describe WithPaperclip do
     end
 
     it "creates the pdf cover image" do
+      expect(pdf_cover_path).to match(/.*jpeg$/)
       expect(pdf_cover_digest).to eq(sample_image_digest)
     end
   end
