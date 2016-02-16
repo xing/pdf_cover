@@ -1,4 +1,4 @@
-require "digest/md5"
+require "rmagick"
 
 require "spec_helper"
 require "xing/pdf_cover/converter"
@@ -59,15 +59,15 @@ describe Xing::PdfCover::Converter do
       end
     end
 
-    context "conversion samples", slow: true do
+    context "conversion samples" do
       Dir.foreach("spec/test_pdfs") do |file_name|
         next unless file_name =~ /.pdf$/
 
         context "for the file #{file_name}" do
           let(:converted_image) { Magick::Image.read(subject.converted_file.path).first }
-          let(:converted_image_digest) { Digest::MD5.hexdigest converted_image.export_pixels.join }
+          let(:converted_image_digest) { converted_image.signature }
           let(:sample_image) { Magick::Image.read(sample_image_name).first }
-          let(:sample_image_digest) { Digest::MD5.hexdigest sample_image.export_pixels.join }
+          let(:sample_image_digest) { sample_image.signature }
           let(:sample_image_name) { "spec/test_pdfs/#{file_name.gsub(/.pdf$/, '.jpg')}" }
 
           subject { described_class.new(File.open("spec/test_pdfs/#{file_name}")) }

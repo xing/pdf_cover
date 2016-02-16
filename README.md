@@ -56,17 +56,3 @@ we use to test the ActiveRecord+(Paperclip|CarrierWave) integration.
 
 Once you have setup the gem locally you can just run `rake` from the root folder
 of the gem to run the specs.
-
-This will run the specs that are considered fast, but there is another set of
-specs that are marked as *SLOW* using a rspec tag, and which won't be run by
-default when using rake.
-
-The reason this specs are slow is because they use an included sample of PDFs
-to check if the gem generates the correct images for them. This PDFs are sometimes
-quite big and so they take a while to process.
-
-To run all the specs, including the slow ones, use the following command:
-
-```Shell
-RUN_SLOW_SPECS=1 rake # This will take 10 minutes, go get a coffee!
-```
