@@ -9,10 +9,23 @@ if Kernel.const_defined?(:Paperclip)
     #   @file the file that will be operated on (which is an instance of File)
     #   @options a hash of options that were defined in has_attached_file's style hash
     #   @attachment the Paperclip::Attachment itself
-
     class PdfCover < Processor
+      QUALITY_CONVERT_OPTION_REGEX = /-quality\s+(?<quality>\d+)/
+
       def make
-        Xing::PdfCover::Converter.new(@file).converted_file
+        Xing::PdfCover::Converter.new(@file, format: format, quality: jpeg_quality)
+          .converted_file
+      end
+
+      def format
+        @options[:format].to_s
+      end
+
+      def jpeg_quality
+        return nil unless %w(jpeg jpg).include?(format)
+
+        match_data = QUALITY_CONVERT_OPTION_REGEX.match(@options[:convert_options])
+        match_data && match_data[:quality]
       end
     end
   end

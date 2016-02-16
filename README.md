@@ -14,13 +14,17 @@ To add a PDF cover style to your attachments you can do something like this:
 class WithPaperclip < ActiveRecord::Base
   include Xing::PdfCover
 
-  pdf_cover_attachment :pdf
+  pdf_cover_attachment :pdf, styles: { pdf_cover: ['', :jpeg]},
+    convert_options: { all: '-quality 95' },
+
+  validates_attachment_content_type :pdf, content_type: %w(application/pdf)
 end
 ```
 
 This will define an attachment called `pdf` which has a `pdf_cover` style attached
-to it that is a JPEG of the first page in the PDF. You can pass another format
-as the second argument to the `pdf_cover_attachment` call (i.e. :png).
+to it that is a JPEG of the first page in the PDF. You can pass any option that you
+would normally pass to `has_attached_file` in the options hash and it will be
+passed through to the underlying `has_attached_file` call.
 
 ## CarrierWave
 

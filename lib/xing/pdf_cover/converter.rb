@@ -7,9 +7,10 @@ module Xing
         end
       end
 
-      def initialize(file, format = "jpeg")
+      def initialize(file, options = {})
         @file = file
-        @format = format
+        @format = options[:format] || "jpeg"
+        @quality = options[:quality] || 95
       end
 
       # @raises PdfCover::Converter::CommandNotFoundError if GhostScript is not found
@@ -31,15 +32,11 @@ module Xing
       end
 
       def build_parameters(source, device, destination)
-        %W(
-          -sOutputFile='#{destination}'
-          -dNOPAUSE
-          -sDEVICE='#{device}'
-          -dFirstPage=1
-          -dLastPage=1
-          -r300
-          -q '#{source}'
-          -c quit
+        %W(-sOutputFile='#{destination}' -dNOPAUSE
+           -sDEVICE='#{device}' -dJPEGQ=#{@quality}
+           -dFirstPage=1 -dLastPage=1
+           -r300 -q '#{source}'
+           -c quit
         ).join(" ")
       end
 

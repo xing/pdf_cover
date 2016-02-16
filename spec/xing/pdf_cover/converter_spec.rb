@@ -4,11 +4,10 @@ require "spec_helper"
 require "xing/pdf_cover/converter"
 
 describe Xing::PdfCover::Converter do
-  subject { described_class.new(source_file, format) }
+  subject { described_class.new(source_file) }
 
   let(:source_file) { double(File, path: "original_path") }
   let(:destination_file) { double(File, path: "destination_path") }
-  let(:format) { nil }
 
   describe "#converted_file" do
     context "general logic" do
