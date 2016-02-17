@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe Xing::PdfCover do
+describe PdfCover do
   it "has a version number" do
-    expect(Xing::PdfCover::VERSION).not_to be nil
+    expect(PdfCover::VERSION).not_to be nil
   end
 
   let(:base) { Class.new }
@@ -10,8 +10,8 @@ describe Xing::PdfCover do
   context "CarrierWave is included in the base module" do
     before do
       expect(described_class).to receive(:carrierwave_defined?).with(base).and_return(true)
-      expect(base).to receive(:extend).with(Xing::PdfCover::ClassMethods::CarrierWave)
-      expect(base).not_to receive(:extend).with(Xing::PdfCover::ClassMethods::Paperclip)
+      expect(base).to receive(:extend).with(PdfCover::ClassMethods::CarrierWave)
+      expect(base).not_to receive(:extend).with(PdfCover::ClassMethods::Paperclip)
     end
 
     it "includes the carrierwave helper method" do
@@ -23,8 +23,8 @@ describe Xing::PdfCover do
     before do
       expect(described_class).to receive(:carrierwave_defined?).with(base).and_return(false)
       expect(described_class).to receive(:paperclip_defined?).and_return(true)
-      expect(base).not_to receive(:extend).with(Xing::PdfCover::ClassMethods::CarrierWave)
-      expect(base).to receive(:extend).with(Xing::PdfCover::ClassMethods::Paperclip)
+      expect(base).not_to receive(:extend).with(PdfCover::ClassMethods::CarrierWave)
+      expect(base).to receive(:extend).with(PdfCover::ClassMethods::Paperclip)
     end
 
     it "includes the carrierwave helper method" do
@@ -36,8 +36,8 @@ describe Xing::PdfCover do
     before do
       expect(described_class).to receive(:carrierwave_defined?).with(base).and_return(false)
       expect(described_class).to receive(:paperclip_defined?).and_return(false)
-      expect(base).not_to receive(:extend).with(Xing::PdfCover::ClassMethods::CarrierWave)
-      expect(base).not_to receive(:extend).with(Xing::PdfCover::ClassMethods::Paperclip)
+      expect(base).not_to receive(:extend).with(PdfCover::ClassMethods::CarrierWave)
+      expect(base).not_to receive(:extend).with(PdfCover::ClassMethods::Paperclip)
     end
 
     it "raises an error" do

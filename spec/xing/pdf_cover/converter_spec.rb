@@ -1,9 +1,9 @@
 require "rmagick"
 
 require "spec_helper"
-require "xing/pdf_cover/converter"
+require "pdf_cover/converter"
 
-describe Xing::PdfCover::Converter do
+describe PdfCover::Converter do
   subject { described_class.new(source_file) }
 
   let(:source_file) { double(File, path: "original_path") }
@@ -52,7 +52,7 @@ describe Xing::PdfCover::Converter do
           let(:execution_result) { nil }
 
           it "generates an error" do
-            expect { subject.converted_file }.to raise_error(Xing::PdfCover::Converter::CommandNotFoundError)
+            expect { subject.converted_file }.to raise_error(PdfCover::Converter::CommandNotFoundError)
           end
         end
       end

@@ -1,7 +1,7 @@
 require "paperclip/pdf_cover"
 
 class WithPaperclip < ActiveRecord::Base
-  include Xing::PdfCover
+  include PdfCover
 
   pdf_cover_attachment :pdf, styles: { pdf_cover: ['', :jpg]},
     convert_options: { all: '-quality 95' }

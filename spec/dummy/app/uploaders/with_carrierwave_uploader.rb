@@ -1,5 +1,5 @@
 class WithCarrierwaveUploader < CarrierWave::Uploader::Base
-  include Xing::PdfCover
+  include PdfCover
 
   storage :file
 

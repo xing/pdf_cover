@@ -13,7 +13,7 @@ require "paperclip/matchers"
 require "carrierwave"
 
 # The gem itself
-require "xing/pdf_cover"
+require "pdf_cover"
 
 RSpec.configure do |config|
   config.include Paperclip::Shoulda::Matchers

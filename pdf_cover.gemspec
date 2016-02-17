@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "xing/pdf_cover/version"
+require "pdf_cover/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "xing-pdf_cover"
-  spec.version       = Xing::PdfCover::VERSION
+  spec.name          = "pdf_cover"
+  spec.version       = PdfCover::VERSION
   spec.authors       = ["Juan González"]
   spec.email         = ["juan.gonzalez@xing.com"]
 
@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
                          having a version of a PDF attachment that is actually an image
                          representing the first page on that PDF. This gem uses GhostScript,
                          so it must be installed in order for it to work.)
-  spec.homepage      = "http://source.xing.com/gems/xing-pdf_cover"
+  spec.homepage      = "http://githum.com/xing/pdf_cover"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }

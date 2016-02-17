@@ -1,4 +1,4 @@
-# Xing::PdfCover
+# PdfCover
 
 With this gem you can easily have attachments for PDF files that have associated
 images generated for their first page.
@@ -12,7 +12,7 @@ To add a PDF cover style to your attachments you can do something like this:
 
 ```Ruby
 class WithPaperclip < ActiveRecord::Base
-  include Xing::PdfCover
+  include PdfCover
 
   pdf_cover_attachment :pdf, styles: { pdf_cover: ['', :jpeg]},
     convert_options: { all: '-quality 95' },
@@ -33,7 +33,7 @@ you can do something like this:
 
 ```Ruby
 class WithCarrierwaveUploader < CarrierWave::Uploader::Base
-  include Xing::PdfCover
+  include PdfCover
 
   storage :file
 
@@ -43,7 +43,7 @@ class WithCarrierwaveUploader < CarrierWave::Uploader::Base
 end
 ```
 
-In this case, when we mix the `Xing::PdfCover` module in, it adds the `pdf_cover_attachment`
+In this case, when we mix the `PdfCover` module in, it adds the `pdf_cover_attachment`
 method to our uploader. We only need to call it inside one of our versions to get the
 pdf to image feature.
 

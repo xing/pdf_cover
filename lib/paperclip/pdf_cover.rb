@@ -1,5 +1,5 @@
 if Kernel.const_defined?(:Paperclip)
-  require "xing/pdf_cover/converter"
+  require "pdf_cover/converter"
 
   module Paperclip
     # This is a Paperclip::Processor that can be used to generate an image
@@ -13,7 +13,7 @@ if Kernel.const_defined?(:Paperclip)
       QUALITY_CONVERT_OPTION_REGEX = /-quality\s+(?<quality>\d+)/
 
       def make
-        Xing::PdfCover::Converter.new(@file, format: format, quality: jpeg_quality)
+        ::PdfCover::Converter.new(@file, format: format, quality: jpeg_quality)
           .converted_file
       end
 
