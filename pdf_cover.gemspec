@@ -38,5 +38,5 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "rmagick", "~> 2.13.2"
 
-  spec.add_runtime_dependency "rails", "~> 4.2.5"
+  spec.add_runtime_dependency "rails", "~> 4.2.4"
 end
