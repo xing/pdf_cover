@@ -13,8 +13,7 @@ if Kernel.const_defined?(:Paperclip)
       QUALITY_CONVERT_OPTION_REGEX = /-quality\s+(?<quality>\d+)/
 
       def make
-        ::PdfCover::Converter.new(@file, format: format, quality: jpeg_quality)
-          .converted_file
+        ::PdfCover::Converter.new(@file, format: format, quality: jpeg_quality).converted_file
       end
 
       def format
