@@ -1,5 +1,7 @@
 # PdfCover
 
+![Build Status](https://api.travis-ci.org/xing/pdf_cover.svg)
+
 With this gem you can easily have attachments for PDF files that have associated
 images generated for their first page.
 
