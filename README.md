@@ -1,41 +1,62 @@
-# Xing::PdfCover
+# PdfCover
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/xing/pdf_cover`. To experiment with that code, run `bin/console` for an interactive prompt.
+With this gem you can easily have attachments for PDF files that have associated
+images generated for their first page.
 
-TODO: Delete this and the text above, and describe your gem
+Support is provided both for [Paperclip](https://github.com/thoughtbot/paperclip)
+and [CarrierWave](https://github.com/carrierwaveuploader/carrierwave).
 
-## Installation
+## Paperclip Support
 
-Add this line to your application's Gemfile:
+To add a PDF cover style to your attachments you can do something like this:
 
-```ruby
-gem 'xing-pdf_cover'
+```Ruby
+class WithPaperclip < ActiveRecord::Base
+  include PdfCover
+
+  pdf_cover_attachment :pdf, styles: { pdf_cover: ['', :jpeg]},
+    convert_options: { all: '-quality 95' },
+
+  validates_attachment_content_type :pdf, content_type: %w(application/pdf)
+end
 ```
 
-And then execute:
+This will define an attachment called `pdf` which has a `pdf_cover` style attached
+to it that is a JPEG of the first page in the PDF. You can pass any option that you
+would normally pass to `has_attached_file` in the options hash and it will be
+passed through to the underlying `has_attached_file` call.
 
-    $ bundle
+## CarrierWave
 
-Or install it yourself as:
+When using CarrierWave you can implement this gem's functionality
+you can do something like this:
 
-    $ gem install xing-pdf_cover
+```Ruby
+class WithCarrierwaveUploader < CarrierWave::Uploader::Base
+  include PdfCover
 
-## Usage
+  storage :file
 
-TODO: Write usage instructions here
+  version :image do
+    pdf_cover_attachment
+  end
+end
+```
 
-## Development
+In this case, when we mix the `PdfCover` module in, it adds the `pdf_cover_attachment`
+method to our uploader. We only need to call it inside one of our versions to get the
+pdf to image feature.
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+# Developing this gem
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+After cloning this gem locally just run the `bin/setup` script to set everything
+up. This will:
 
-## Contributing
+- Run `bundle` to install the development dependencies
+- Initialize the database used by the `spec/dummy` rails application that
+we use to test the ActiveRecord+(Paperclip|CarrierWave) integration.
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/xing-pdf_cover.
+## Running the specs
 
-
-## License
-
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
+Once you have setup the gem locally you can just run `rake` from the root folder
+of the gem to run the specs.
