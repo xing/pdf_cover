@@ -2,6 +2,8 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/test_pdfs"
 
+echo "Working directory $DIR"
+
 echo "Removing previous output"
 rm $DIR/*.jpg
 
