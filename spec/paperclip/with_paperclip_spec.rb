@@ -1,5 +1,5 @@
 require "spec_helper"
-require "rmagick"
+require "RMagick"
 require File.expand_path("../../dummy/config/environment.rb", __FILE__)
 
 describe WithPaperclip do

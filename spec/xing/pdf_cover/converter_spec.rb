@@ -1,4 +1,4 @@
-require "rmagick"
+require "RMagick"
 
 require "spec_helper"
 require "pdf_cover/converter"

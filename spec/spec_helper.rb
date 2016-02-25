@@ -3,8 +3,8 @@ $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
 ENV["RAILS_ENV"] ||= "test"
 
 # Code coverage
-require "simplecov"
-SimpleCov.start
+require "coveralls"
+Coveralls.wear!
 
 # Development dependencies
 require "byebug"

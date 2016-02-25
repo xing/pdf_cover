@@ -18,7 +18,8 @@ AllCops:
 
   # By default, the rails cops are not run. Override in project or home
   # directory .rubocop.yml files, or by giving the -R/--rails option.
-  RunRailsCops: true
+Rails:
+  Enabled: true
 
 # Indent private/protected/public as deep as method definitions
 AccessModifierIndentation:
@@ -582,7 +583,7 @@ TrailingBlankLines:
     - final_newline
     - final_blank_line
 
-TrailingComma:
+TrailingCommaInLiteral:
   Description: 'Checks for trailing comma in parameter lists and literals.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-trailing-array-commas'
   Enabled: true
@@ -758,12 +759,6 @@ ActionFilter:
     - filter
   Include:
     - app/controllers/**/*.rb
-
-DefaultScope:
-  Description: 'Checks if the argument passed to default_scope is a block.'
-  Enabled: true
-  Include:
-    - app/models/**/*.rb
 
 HasAndBelongsToMany:
   Description: 'Prefer has_many :through to has_and_belongs_to_many.'
@@ -1124,7 +1119,7 @@ SelfAssignment:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#self-assignment'
   Enabled: true
 
-SingleSpaceBeforeFirstArg:
+SpaceBeforeFirstArg:
   Description: >-
                  Checks that exactly one space is used between a method name
                  and the first argument for method calls without parentheses.
@@ -1138,10 +1133,6 @@ SpaceAfterColon:
 SpaceAfterComma:
   Description: 'Use spaces after commas.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#spaces-operators'
-  Enabled: true
-
-SpaceAfterControlKeyword:
-  Description: 'Use spaces after if/elsif/unless/while/until/case/when.'
   Enabled: true
 
 SpaceAfterMethodName:
@@ -1178,10 +1169,6 @@ SpaceBeforeSemicolon:
 SpaceAroundOperators:
   Description: 'Use spaces around operators.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#spaces-operators'
-  Enabled: true
-
-SpaceBeforeModifierKeyword:
-  Description: 'Put a space before the modifier keyword.'
   Enabled: true
 
 SpaceInsideBrackets:

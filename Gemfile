@@ -1,3 +1,3 @@
-source "http://gems.xing.com"
+source "https://rubygems.org"
 
 gemspec
