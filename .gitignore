@@ -9,6 +9,7 @@
 /spec/dummy/log/*
 /spec/dummy/public/system/
 /spec/reports/
+/spec/test_pdfs/*.jpg
 /tmp/
 /vendor/bundle
 /uploads
