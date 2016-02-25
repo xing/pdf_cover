@@ -8,3 +8,5 @@ bundle install
 cd spec/dummy
 bundle exec rake db:test:prepare
 cd -
+
+sh spec/generate_jpegs.sh
