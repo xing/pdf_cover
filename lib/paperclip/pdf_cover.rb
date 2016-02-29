@@ -26,19 +26,18 @@ if Kernel.const_defined?(:Paperclip)
       end
 
       def jpeg_quality
-        return {} unless %w(jpeg jpg).include?(format)
-
-        match_data = QUALITY_CONVERT_OPTION_REGEX.match(@options[:convert_options])
-        quality = match_data && match_data[:quality]
-
-        quality ? { quality: quality } : {}
+        extract_convert_option(:quality, QUALITY_CONVERT_OPTION_REGEX)
       end
 
       def jpeg_resolution
-        match_data = RESOLUTION_CONVERT_OPTION_REGEX.match(@options[:convert_options])
-        resolution = match_data && match_data[:resolution]
+        extract_convert_option(:resolution, RESOLUTION_CONVERT_OPTION_REGEX)
+      end
 
-        resolution ? { resolution: resolution } : {}
+      def extract_convert_option(key, regex)
+        match_data = regex.match(@options[:convert_options])
+        match = match_data && match_data[key]
+
+        match ? { key => match } : {}
       end
     end
   end
