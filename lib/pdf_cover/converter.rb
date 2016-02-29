@@ -28,7 +28,7 @@ module PdfCover
         when :ok
           destination_file
         when :command_failed
-          @file # TODO: Why this? Shouldn't we just crash?
+          @file
         when :command_not_found
           fail CommandNotFoundError
       end
