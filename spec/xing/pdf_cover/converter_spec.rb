@@ -9,6 +9,68 @@ describe PdfCover::Converter do
   let(:source_file) { double(File, path: "original_path") }
   let(:destination_file) { double(File, path: "destination_path") }
 
+  describe "#initialize" do
+    subject { described_class.new(source_file, options) }
+
+    context "parameter provided" do
+      let(:format) { "jpg" }
+      let(:quality) { "89" }
+      let(:options) do
+        {
+          format: format,
+          quality: quality,
+          resolution: resolution
+        }
+      end
+      let(:resolution) { "273" }
+
+      context "all parameters are ok" do
+        it "saves the parameters" do
+          expect(subject.instance_variable_get(:@format)).to eq(format)
+          expect(subject.instance_variable_get(:@quality)).to eq(quality.to_i)
+          expect(subject.instance_variable_get(:@resolution)).to eq(resolution.to_i)
+        end
+      end
+
+      context "format is invalid" do
+        let(:format) { "gif" }
+
+        it "raises an error" do
+          expect { subject }.to raise_error(PdfCover::Converter::InvalidOption)
+        end
+      end
+
+      context "quality is invalid" do
+        let(:quality) { -10 }
+
+        it "raises an error" do
+          expect { subject }.to raise_error(PdfCover::Converter::InvalidOption)
+        end
+      end
+
+      context "resolution is invalid" do
+        let(:resolution) { -10 }
+
+        it "raises an error" do
+          expect { subject }.to raise_error(PdfCover::Converter::InvalidOption)
+        end
+      end
+    end
+
+    context "parameters not provided" do
+      let(:options) { {} }
+
+      it "uses the default values" do
+        expect(subject.instance_variable_get(:@format))
+          .to eq(described_class::DEFAULT_FORMAT)
+        expect(subject.instance_variable_get(:@quality))
+          .to eq(described_class::DEFAULT_QUALITY)
+        expect(subject.instance_variable_get(:@resolution))
+          .to eq(described_class::DEFAULT_RESOLUTION)
+      end
+    end
+  end
+
   describe "#converted_file" do
     context "general logic" do
       before do
