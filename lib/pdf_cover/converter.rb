@@ -1,6 +1,6 @@
 module PdfCover
   class Converter
-    # NOTE: Update the generate_jpegs.sh script when changing this values
+    # NOTE: Update the generate_jpegs.sh script when changing these values
     DEFAULT_FORMAT = "jpeg"
     DEFAULT_QUALITY = 85
     DEFAULT_RESOLUTION = 300

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# NOTE: Update the converter.rb file when changing this values
+# NOTE: Update the converter.rb file when changing these values
 DEFAULT_FORMAT="jpeg"
 DEFAULT_QUALITY=85
 DEFAULT_RESOLUTION=300
