@@ -91,7 +91,7 @@ module PdfCover
 
   # This is the method used by the CarrierWave processor mechanism
   def pdf_cover(quality, resolution)
-    options = { quality: quality, resolution: resolution }
+    options = { quality: quality, resolution: resolution }.compact
     converted_file = PdfCover::Converter.new(file, options).converted_file
     FileUtils.cp(converted_file, current_path)
   end
