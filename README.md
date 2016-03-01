@@ -6,6 +6,9 @@ images generated for their first page.
 Support is provided both for [Paperclip](https://github.com/thoughtbot/paperclip)
 and [CarrierWave](https://github.com/carrierwaveuploader/carrierwave).
 
+In both cases the JPEG quality and resolution are optional and will be set to 85%
+and 300dpi respectively when not provided.
+
 ## Paperclip Support
 
 To add a PDF cover style to your attachments you can do something like this:
@@ -15,7 +18,7 @@ class WithPaperclip < ActiveRecord::Base
   include PdfCover
 
   pdf_cover_attachment :pdf, styles: { pdf_cover: ['', :jpeg]},
-    convert_options: { all: '-quality 95' },
+    convert_options: { all: '-quality 95 -density 300' },
 
   validates_attachment_content_type :pdf, content_type: %w(application/pdf)
 end
@@ -38,7 +41,7 @@ class WithCarrierwaveUploader < CarrierWave::Uploader::Base
   storage :file
 
   version :image do
-    pdf_cover_attachment
+    pdf_cover_attachment quality: 95, resolution: 300
   end
 end
 ```

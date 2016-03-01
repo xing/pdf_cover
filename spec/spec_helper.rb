@@ -11,6 +11,7 @@ require "byebug"
 require "paperclip"
 require "paperclip/matchers"
 require "carrierwave"
+require "RMagick"
 
 # The gem itself
 require "pdf_cover"

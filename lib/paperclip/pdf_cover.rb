@@ -11,20 +11,33 @@ if Kernel.const_defined?(:Paperclip)
     #   @attachment the Paperclip::Attachment itself
     class PdfCover < Processor
       QUALITY_CONVERT_OPTION_REGEX = /-quality\s+(?<quality>\d+)/
+      RESOLUTION_CONVERT_OPTION_REGEX = /-density\s+(?<resolution>\d+)/
 
       def make
-        ::PdfCover::Converter.new(@file, format: format, quality: jpeg_quality).converted_file
+        ::PdfCover::Converter.new(@file, converter_options).converted_file
+      end
+
+      def converter_options
+        format.merge(jpeg_quality).merge(jpeg_resolution)
       end
 
       def format
-        @options[:format].to_s
+        { format: @options[:format].to_s }
       end
 
       def jpeg_quality
-        return nil unless %w(jpeg jpg).include?(format)
+        extract_convert_option(:quality, QUALITY_CONVERT_OPTION_REGEX)
+      end
 
-        match_data = QUALITY_CONVERT_OPTION_REGEX.match(@options[:convert_options])
-        match_data && match_data[:quality]
+      def jpeg_resolution
+        extract_convert_option(:resolution, RESOLUTION_CONVERT_OPTION_REGEX)
+      end
+
+      def extract_convert_option(key, regex)
+        match_data = regex.match(@options[:convert_options])
+        match = match_data && match_data[key]
+
+        match ? { key => match } : {}
       end
     end
   end

@@ -29,8 +29,8 @@ module PdfCover
       #       pdf_cover_attachment
       #     end
       #   end
-      def pdf_cover_attachment
-        process :pdf_cover
+      def pdf_cover_attachment(options = {})
+        process pdf_cover: [options[:quality], options[:resolution]]
 
         define_method :full_filename do |for_file = model.logo.file|
           for_file.gsub(/pdf$/, "jpeg")
@@ -54,7 +54,7 @@ module PdfCover
       #     include PdfCover
       #
       #     pdf_cover_attachment :pdf, styles: { pdf_cover: ['', :jpeg]},
-      #       convert_options: { all: '-quality 95' }
+      #       convert_options: { all: '-quality 95 -density 300' }
       #
       #     # Note that you must set content type validation as required by Paperclip
       #     validates_attachment_content_type :pdf, content_type: %w(application/pdf)
@@ -89,9 +89,10 @@ module PdfCover
     end
   end
 
-  # This is the method used by the PaperClip processor mechanism
-  def pdf_cover
-    converted_file = PdfCover::Converter.new(file).converted_file
+  # This is the method used by the CarrierWave processor mechanism
+  def pdf_cover(quality, resolution)
+    options = { quality: quality, resolution: resolution }
+    converted_file = PdfCover::Converter.new(file, options).converted_file
     FileUtils.cp(converted_file, current_path)
   end
 end
