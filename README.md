@@ -55,9 +55,10 @@ pdf to image feature.
 After cloning this gem locally just run the `bin/setup` script to set everything
 up. This will:
 
-- Run `bundle` to install the development dependencies
+- Run `bundle` to install the development dependencies.
 - Initialize the database used by the `spec/dummy` rails application that
 we use to test the ActiveRecord+(Paperclip|CarrierWave) integration.
+- Generate JPEG files used in the specs.
 
 ## Running the specs
 
