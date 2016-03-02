@@ -4,7 +4,10 @@ require "rubocop/rake_task"
 
 ENV["RAILS_ENV"] ||= "test"
 
-RSpec::Core::RakeTask.new(:spec)
+RSpec::Core::RakeTask.new(:spec).tap do |rspec_task|
+  rspec_task.rspec_opts = "--fail-fast"
+  rspec_task.rspec_opts += " --seed #{ENV['SEED']}" if ENV["SEED"]
+end
 
 RuboCop::RakeTask.new(:rubocop)
 
