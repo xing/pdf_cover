@@ -4,9 +4,7 @@ require "rubocop/rake_task"
 
 ENV["RAILS_ENV"] ||= "test"
 
-RSpec::Core::RakeTask.new(:spec).tap do |rspec_task|
-  rspec_task.rspec_opts = "--fail-fast"
-end
+RSpec::Core::RakeTask.new(:spec)
 
 RuboCop::RakeTask.new(:rubocop)
 

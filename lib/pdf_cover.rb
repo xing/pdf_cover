@@ -60,7 +60,7 @@ module PdfCover
       #     validates_attachment_content_type :pdf, content_type: %w(application/pdf)
       #   end
       def pdf_cover_attachment(attachment_name, options = {})
-        options[:processors] = (options[:processors] || []).unshift(:pdf_cover)
+        options[:processors] = (options[:processors] || []).unshift(:pdf_cover_processor)
 
         has_attached_file attachment_name, options
       end
@@ -72,6 +72,7 @@ module PdfCover
       if carrierwave_defined?(base)
         base.extend ClassMethods::CarrierWave
       elsif paperclip_defined?
+        require "paperclip/pdf_cover_processor"
         base.extend ClassMethods::Paperclip
       else
         fail "#{base} is not a CarrierWave::Uploader and Paperclip is not defined ¯\\_(ツ)_/¯"

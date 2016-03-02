@@ -1,5 +1,3 @@
-require "paperclip/pdf_cover"
-
 class WithPaperclip < ActiveRecord::Base
   include PdfCover
 
