@@ -33,7 +33,7 @@ module PdfCover
         process pdf_cover: [options[:quality], options[:resolution]]
 
         define_method :full_filename do |for_file = model.logo.file|
-          for_file.gsub(/pdf$/, "jpeg")
+          for_file.gsub(/pdf$/i, "jpeg")
         end
       end
     end

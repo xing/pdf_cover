@@ -13,14 +13,28 @@ describe WithCarrierwave do
     let(:sample_image_digest) { sample_image.signature }
     let(:sample_image_name) { "#{base_pdf_name}.jpg" }
 
-    before do
-      subject.pdf = File.new("#{base_pdf_name}.pdf")
-      subject.save!
+    shared_examples "handling file extension" do
+      before do
+        subject.pdf = File.new("#{base_pdf_name}.#{extension}")
+        subject.save!
+      end
+
+      it "creates the pdf cover image" do
+        expect(pdf_cover_path).to match(/.*jpeg$/)
+        expect(pdf_cover_digest).to eq(sample_image_digest)
+      end
     end
 
-    it "creates the pdf cover image" do
-      expect(pdf_cover_path).to match(/.*jpeg$/)
-      expect(pdf_cover_digest).to eq(sample_image_digest)
+    context "extension is lowercase" do
+      let(:extension) { "pdf" }
+
+      it_behaves_like "handling file extension"
+    end
+
+    context "extension is lowercase" do
+      let(:extension) { "PDF" }
+
+      it_behaves_like "handling file extension"
     end
   end
 end
