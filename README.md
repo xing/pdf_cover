@@ -1,4 +1,4 @@
-# PdfCover [![Build Status](https://api.travis-ci.org/xing/pdf_cover.svg)](https://travis-ci.org/xing/pdf_cover) [![Code Climate](https://codeclimate.com/github/xing/pdf_cover/badges/gpa.svg)](https://codeclimate.com/github/xing/pdf_cover) [![Coverage Status](https://coveralls.io/repos/github/xing/pdf_cover/badge.svg?branch=master)](https://coveralls.io/github/xing/pdf_cover?branch=master)
+# PdfCover [![Build Status](https://travis-ci.org/xing/pdf_cover.svg?branch=master)](https://travis-ci.org/xing/pdf_cover) [![Code Climate](https://codeclimate.com/github/xing/pdf_cover/badges/gpa.svg)](https://codeclimate.com/github/xing/pdf_cover) [![Coverage Status](https://coveralls.io/repos/github/xing/pdf_cover/badge.svg?branch=master)](https://coveralls.io/github/xing/pdf_cover?branch=master)
 
 With this gem you can easily have attachments for PDF files that have associated
 images generated for their first page.
