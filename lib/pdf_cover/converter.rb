@@ -7,6 +7,9 @@ module PdfCover
     DEFAULT_QUALITY = 85
     DEFAULT_RESOLUTION = 300
 
+    COMMAND_EXECUTION_SUCCESS_CODE = 0
+    COMMAND_NOT_FOUND_CODE = 127 # @see http://www.tldp.org/LDP/abs/html/exitcodes.html
+
     class CommandFailedError < StandardError
       def initialize(stdout_str, stderr_str)
         super("PDF conversion failed:\nSTDOUT: #{stdout_str}\nSTDERR: #{stderr_str}")
@@ -37,8 +40,8 @@ module PdfCover
       stdout_str, stderr_str, status = execute_command("gs #{parameters}")
 
       case status
-        when 0 then destination_file
-        when 127 then fail CommandNotFoundError
+        when COMMAND_EXECUTION_SUCCESS_CODE then destination_file
+        when COMMAND_NOT_FOUND_CODE then fail CommandNotFoundError
         else fail CommandFailedError.new(stdout_str, stderr_str)
       end
     rescue => e
