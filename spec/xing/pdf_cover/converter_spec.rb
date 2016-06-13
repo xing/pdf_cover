@@ -80,7 +80,7 @@ describe PdfCover::Converter do
       end
 
       context "the conversion goes fine" do
-        let(:execution_result) { true }
+        let(:execution_result) { ["", "", 0] }
 
         it "returns the generated file" do
           expect(subject.converted_file).to eq(destination_file)
@@ -93,23 +93,16 @@ describe PdfCover::Converter do
         end
 
         context "because the command execution failed" do
-          let(:execution_result) { false }
+          let(:execution_result) { ["", "", 1] }
           let(:logger) { double(Logger) }
 
-          const_set(:CHILD_STATUS, "something went wrong")
-
-          before do
-            expect(subject).to receive(:logger).and_return(logger)
-            expect(logger).to receive(:warn)
-          end
-
-          it "returns the original file" do
-            expect(subject.converted_file).to eq(source_file)
+          it "generates an error" do
+            expect { subject.converted_file }.to raise_error(PdfCover::Converter::CommandFailedError)
           end
         end
 
         context "because the GhostScript command is not found" do
-          let(:execution_result) { nil }
+          let(:execution_result) { ["", "", 127] }
 
           it "generates an error" do
             expect { subject.converted_file }.to raise_error(PdfCover::Converter::CommandNotFoundError)

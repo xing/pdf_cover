@@ -1,9 +1,20 @@
+require "open3"
+
 module PdfCover
   class Converter
     # NOTE: Update the generate_jpegs.sh script when changing these values
     DEFAULT_FORMAT = "jpeg"
     DEFAULT_QUALITY = 85
     DEFAULT_RESOLUTION = 300
+
+    COMMAND_EXECUTION_SUCCESS_CODE = 0
+    COMMAND_NOT_FOUND_CODE = 127 # @see http://www.tldp.org/LDP/abs/html/exitcodes.html
+
+    class CommandFailedError < StandardError
+      def initialize(stdout_str, stderr_str)
+        super("PDF conversion failed:\nSTDOUT: #{stdout_str}\nSTDERR: #{stderr_str}")
+      end
+    end
 
     class CommandNotFoundError < StandardError
       def initialize
@@ -23,15 +34,19 @@ module PdfCover
     end
 
     # @raises PdfCover::Converter::CommandNotFoundError if GhostScript is not found
+    # @raises PdfCover::Converter::CommandFailedError if GhostScript returns a non-zero status
     def converted_file
-      case convert_file
-        when :ok
-          destination_file
-        when :command_failed
-          @file
-        when :command_not_found
-          fail CommandNotFoundError
+      parameters = build_parameters(file_path, device)
+      stdout_str, stderr_str, status = execute_command("gs #{parameters}")
+
+      case status
+        when COMMAND_EXECUTION_SUCCESS_CODE then destination_file
+        when COMMAND_NOT_FOUND_CODE then fail CommandNotFoundError
+        else fail CommandFailedError.new(stdout_str, stderr_str)
       end
+    rescue => e
+      destination_file.close
+      raise e
     end
 
     private
@@ -40,24 +55,13 @@ module PdfCover
       @basename ||= File.basename(@file.path, File.extname(@file.path))
     end
 
-    def build_parameters(source, device, destination)
-      %W(-sOutputFile='#{destination}' -dNOPAUSE
+    def build_parameters(source, device)
+      %W(-sOutputFile='#{destination_path}' -dNOPAUSE
          -sDEVICE='#{device}' -dJPEGQ=#{@quality}
          -dFirstPage=1 -dLastPage=1
          -r#{@resolution} -q '#{source}'
          -c quit
       ).join(" ")
-    end
-
-    def convert_file
-      parameters = build_parameters(file_path, device, File.expand_path(destination_file.path))
-      result = execute_command("gs #{parameters}")
-
-      if result
-        :ok
-      else
-        failed_result(result)
-      end
     end
 
     def destination_file
@@ -66,12 +70,16 @@ module PdfCover
       end
     end
 
+    def destination_path
+      File.expand_path(destination_file.path)
+    end
+
     def device
       @format.to_s == "jpg" ? "jpeg" : @format.to_s
     end
 
     def execute_command(command)
-      Kernel.system(command)
+      Open3.capture3(command)
     end
 
     def extract_options(options)
@@ -84,23 +92,8 @@ module PdfCover
       fail InvalidOption.new(:resolution, @resolution) unless @resolution > 1
     end
 
-    def failed_result(result)
-      destination_file.close
-
-      if result == false
-        logger.warn("GhostScript execution failed: #{$CHILD_STATUS}")
-        :command_failed
-      else
-        :command_not_found
-      end
-    end
-
     def file_path
       @file_path ||= File.expand_path(@file.path)
-    end
-
-    def logger
-      @logger ||= defined?(Rails) ? Rails.logger : Logger.new(STDERR)
     end
   end
 end
