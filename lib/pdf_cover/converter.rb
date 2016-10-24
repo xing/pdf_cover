@@ -3,9 +3,10 @@ require "open3"
 module PdfCover
   class Converter
     # NOTE: Update the generate_jpegs.sh script when changing these values
-    DEFAULT_FORMAT = "jpeg"
+    DEFAULT_FORMAT = "jpeg".freeze
     DEFAULT_QUALITY = 85
     DEFAULT_RESOLUTION = 300
+    DEFAULT_ANTIALIASING = 4
 
     COMMAND_EXECUTION_SUCCESS_CODE = 0
     COMMAND_NOT_FOUND_CODE = 127 # @see http://www.tldp.org/LDP/abs/html/exitcodes.html
@@ -59,6 +60,8 @@ module PdfCover
       %W(-sOutputFile='#{destination_path}' -dNOPAUSE
          -sDEVICE='#{device}' -dJPEGQ=#{@quality}
          -dFirstPage=1 -dLastPage=1
+         -dTextAlphaBits=#{@antialiasing}
+         -dGraphicsAlphaBits=#{@antialiasing}
          -r#{@resolution} -q '#{source}'
          -c quit
       ).join(" ")
@@ -86,14 +89,20 @@ module PdfCover
       @format = options.fetch(:format, DEFAULT_FORMAT)
       @quality = options.fetch(:quality, DEFAULT_QUALITY).to_i
       @resolution = options.fetch(:resolution, DEFAULT_RESOLUTION).to_i
+      @antialiasing = options.fetch(:antialiasing, DEFAULT_ANTIALIASING).to_i
 
-      fail InvalidOption.new(:format, @format) unless %w(jpg jpeg png).include?(@format)
-      fail InvalidOption.new(:quality, @quality) unless @quality.between?(1, 100)
-      fail InvalidOption.new(:resolution, @resolution) unless @resolution > 1
+      validate_options
     end
 
     def file_path
       @file_path ||= File.expand_path(@file.path)
+    end
+
+    def validate_options
+      fail InvalidOption.new(:format, @format) unless %w(jpg jpeg png).include?(@format)
+      fail InvalidOption.new(:quality, @quality) unless @quality.between?(1, 100)
+      fail InvalidOption.new(:resolution, @resolution) unless @resolution > 1
+      fail InvalidOption.new(:antialiasing, @antialiasing) unless @antialiasing >= 1 && @antialiasing <= 4
     end
   end
 end

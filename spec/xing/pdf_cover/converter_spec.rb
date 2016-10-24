@@ -17,16 +17,19 @@ describe PdfCover::Converter do
         {
           format: format,
           quality: quality,
-          resolution: resolution
+          resolution: resolution,
+          antialiasing: antialiasing,
         }
       end
       let(:resolution) { "273" }
+      let(:antialiasing) { "3" }
 
       context "all parameters are ok" do
         it "saves the parameters" do
           expect(subject.instance_variable_get(:@format)).to eq(format)
           expect(subject.instance_variable_get(:@quality)).to eq(quality.to_i)
           expect(subject.instance_variable_get(:@resolution)).to eq(resolution.to_i)
+          expect(subject.instance_variable_get(:@antialiasing)).to eq(antialiasing.to_i)
         end
       end
 
@@ -53,6 +56,14 @@ describe PdfCover::Converter do
           expect { subject }.to raise_error(PdfCover::Converter::InvalidOption)
         end
       end
+
+      context "antialiasing is invalid" do
+        let(:antialiasing) { 0 }
+
+        it "raises an error" do
+          expect { subject }.to raise_error(PdfCover::Converter::InvalidOption)
+        end
+      end
     end
 
     context "parameters not provided" do
@@ -65,6 +76,8 @@ describe PdfCover::Converter do
           .to eq(described_class::DEFAULT_QUALITY)
         expect(subject.instance_variable_get(:@resolution))
           .to eq(described_class::DEFAULT_RESOLUTION)
+        expect(subject.instance_variable_get(:@antialiasing))
+          .to eq(described_class::DEFAULT_ANTIALIASING)
       end
     end
   end
