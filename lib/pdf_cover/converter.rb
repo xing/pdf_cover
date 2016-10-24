@@ -3,7 +3,7 @@ require "open3"
 module PdfCover
   class Converter
     # NOTE: Update the generate_jpegs.sh script when changing these values
-    DEFAULT_FORMAT = "jpeg"
+    DEFAULT_FORMAT = "jpeg".freeze
     DEFAULT_QUALITY = 85
     DEFAULT_RESOLUTION = 300
     DEFAULT_ANTIALIASING = 4
@@ -91,14 +91,18 @@ module PdfCover
       @resolution = options.fetch(:resolution, DEFAULT_RESOLUTION).to_i
       @antialiasing = options.fetch(:antialiasing, DEFAULT_ANTIALIASING).to_i
 
-      fail InvalidOption.new(:format, @format) unless %w(jpg jpeg png).include?(@format)
-      fail InvalidOption.new(:quality, @quality) unless @quality.between?(1, 100)
-      fail InvalidOption.new(:resolution, @resolution) unless @resolution > 1
-      fail InvalidOption.new(:antialiasing, @antialiasing) unless @antialiasing >= 1 && @antialiasing <= 4
+      validate_options
     end
 
     def file_path
       @file_path ||= File.expand_path(@file.path)
+    end
+
+    def validate_options
+      fail InvalidOption.new(:format, @format) unless %w(jpg jpeg png).include?(@format)
+      fail InvalidOption.new(:quality, @quality) unless @quality.between?(1, 100)
+      fail InvalidOption.new(:resolution, @resolution) unless @resolution > 1
+      fail InvalidOption.new(:antialiasing, @antialiasing) unless @antialiasing >= 1 && @antialiasing <= 4
     end
   end
 end

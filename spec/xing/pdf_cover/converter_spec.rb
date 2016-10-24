@@ -18,7 +18,7 @@ describe PdfCover::Converter do
           format: format,
           quality: quality,
           resolution: resolution,
-          antialiasing: antialiasing
+          antialiasing: antialiasing,
         }
       end
       let(:resolution) { "273" }
