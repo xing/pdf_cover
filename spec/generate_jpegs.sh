@@ -27,7 +27,6 @@ do
     -dFirstPage=1 \
     -dLastPage=1 \
     -r$DEFAULT_RESOLUTION \
-    -dTextAlphaBits=$DEFAULT_ANTIALIASING \
     -dGraphicsAlphaBits=$DEFAULT_ANTIALIASING \
     -q "$DIR/$INPUT_FILE" -c quit
 done
