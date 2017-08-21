@@ -60,7 +60,6 @@ module PdfCover
       %W(-sOutputFile='#{destination_path}' -dNOPAUSE
          -sDEVICE='#{device}' -dJPEGQ=#{@quality}
          -dFirstPage=1 -dLastPage=1
-         -dTextAlphaBits=#{@antialiasing}
          -dGraphicsAlphaBits=#{@antialiasing}
          -r#{@resolution} -q '#{source}'
          -c quit
