@@ -57,11 +57,11 @@ module PdfCover
     end
 
     def build_parameters(source, device)
-      %W(-sOutputFile='#{destination_path}' -dNOPAUSE
-         -sDEVICE='#{device}' -dJPEGQ=#{@quality}
+      %W(-sOutputFile="#{destination_path}" -dNOPAUSE
+         -sDEVICE="#{device}" -dJPEGQ=#{@quality}
          -dFirstPage=1 -dLastPage=1
          -dGraphicsAlphaBits=#{@antialiasing}
-         -r#{@resolution} -q '#{source}'
+         -r#{@resolution} -q "#{source}"
          -c quit
       ).join(" ")
     end
