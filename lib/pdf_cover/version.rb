@@ -1,3 +1,3 @@
 module PdfCover
-  VERSION = "0.2.4".freeze
+  VERSION = "0.3.1".freeze
 end

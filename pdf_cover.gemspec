@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "activesupport", ">= 4.2"
+  spec.add_development_dependency "activesupport", ">= 4.2", "< 6.0.0"
 
   spec.add_development_dependency "appraisal"
 
@@ -32,7 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "simplecov"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "rubocop", "~> 0.37.2"
-  spec.add_development_dependency "sqlite3"
+  spec.add_development_dependency "sqlite3", "~> 1.3.6"
 
   spec.add_development_dependency "byebug"
   spec.add_development_dependency "fivemat"

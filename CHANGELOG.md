@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.3.1] - 2019-11-26
+### Added
+- Enforce JPEG content type for carrierwave [Pull Request](https://github.com/xing/pdf_cover/pull/10)
+
+## [0.2.4] - 2017-10-18
+### Added
+- Handle quotes in windows when calling GS [Pull Request](https://github.com/xing/pdf_cover/pull/9)
+
+## [0.2.3] - 2017-08-21
+### Added
+- Remove `dTextAlphaBits` parameter to GS [Pull Request](https://github.com/xing/pdf_cover/pull/8)
+
+## [0.2.3] - 2017-08-21
+### Added
+- Remove `dTextAlphaBits` parameter to GS [Pull Request](https://github.com/xing/pdf_cover/pull/8)
+
+## [0.2.2] - 2017-07-05
+### Added
+- Add support for rails 5 [Pull Request](https://github.com/xing/pdf_cover/pull/7)
+
 ## [0.2.1] - 2016-10-24
 ### Added
 - Add default antialias [Pull Request](https://github.com/xing/pdf_cover/pull/6)

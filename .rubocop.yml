@@ -16,11 +16,6 @@ AllCops:
     - 'db/migrate/*.rb'
     - 'spec/dummy/**/*'
 
-  # By default, the rails cops are not run. Override in project or home
-  # directory .rubocop.yml files, or by giving the -R/--rails option.
-  Rails:
-    Enabled: true
-
 # Indent private/protected/public as deep as method definitions
 AccessModifierIndentation:
   Description: Check indentation of private/protected visibility modifiers.

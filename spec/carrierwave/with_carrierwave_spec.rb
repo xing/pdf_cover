@@ -8,6 +8,7 @@ describe WithCarrierwave do
     let(:pdf_cover) { Magick::Image.read(pdf_cover_path).first }
     let(:pdf_cover_digest) { pdf_cover.signature }
     let(:pdf_cover_path) { subject.pdf.image.path }
+    let(:pdf_cover_content_type) { subject.pdf.image.content_type }
 
     let(:sample_image) { Magick::Image.read(sample_image_name).first }
     let(:sample_image_digest) { sample_image.signature }
@@ -22,6 +23,7 @@ describe WithCarrierwave do
       it "creates the pdf cover image" do
         expect(pdf_cover_path).to match(/.*jpeg$/)
         expect(pdf_cover_digest).to eq(sample_image_digest)
+        expect(pdf_cover_content_type).to eq("image/jpeg")
       end
     end
 

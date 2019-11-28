@@ -31,6 +31,7 @@ module PdfCover
       #   end
       def pdf_cover_attachment(options = {})
         process pdf_cover: [options[:quality], options[:resolution]]
+        process enforce_content_type: "image/jpeg"
 
         define_method :full_filename do |for_file = model.logo.file|
           for_file.gsub(/pdf$/i, "jpeg")
@@ -95,5 +96,9 @@ module PdfCover
     options = { quality: quality, resolution: resolution }.compact
     converted_file = PdfCover::Converter.new(file, options).converted_file
     FileUtils.cp(converted_file, current_path)
+  end
+
+  def enforce_content_type(content_type)
+    file.content_type = content_type
   end
 end
