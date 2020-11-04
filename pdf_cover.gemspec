@@ -1,4 +1,5 @@
 # coding: utf-8
+
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "pdf_cover/version"
@@ -22,23 +23,23 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "activesupport", ">= 4.2", "< 6.0.0"
+  spec.add_development_dependency "activesupport", ">= 4.2", "< 6.0.3.1"
 
   spec.add_development_dependency "appraisal"
 
   spec.add_development_dependency "awesome_print"
-  spec.add_development_dependency "bundler", "~> 1.11"
-  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "bundler"
+  spec.add_development_dependency "rake", "~> 12.3.3"
   spec.add_development_dependency "simplecov"
   spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "rubocop", "~> 0.37.2"
+  spec.add_development_dependency "rubocop", "~> 0.49.0"
   spec.add_development_dependency "sqlite3", "~> 1.3.6"
 
   spec.add_development_dependency "byebug"
   spec.add_development_dependency "fivemat"
   spec.add_development_dependency "coveralls"
 
-  spec.add_development_dependency "paperclip", "=4.1.1"
+  spec.add_development_dependency "paperclip", "=6.1.0"
   spec.add_development_dependency "carrierwave", "~> 0.10"
 
   spec.add_development_dependency "rmagick", "~> 2.13.2"
