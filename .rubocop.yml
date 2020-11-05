@@ -264,6 +264,7 @@ FileName:
     - '**/Gemfile'
     - '**/Capfile'
     - '**/Guardfile'
+    - '**/Appraisals'
 
 # Checks use of for or each in multiline loops.
 For:
@@ -585,9 +586,6 @@ TrailingCommaInLiteral:
   # If EnforcedStyleForMultiline is comma, the cop allows a comma after the
   # last item of a list, but only for lists where each item is on its own line.
   EnforcedStyleForMultiline: comma
-  SupportedStyles:
-    - comma
-    - no_comma
 
 # TrivialAccessors doesn't require exact name matches and doesn't allow
 # predicated methods by default.
@@ -727,9 +725,6 @@ EndAlignment:
   # with the start of the variable on the left hand side of `=`. In all other
   # situations, `end` should still be aligned with the keyword.
   EnforcedStyleAlignWith: keyword
-  SupportedStyles:
-    - keyword
-    - variable
 
 DefEndAlignment:
   Description: 'Align ends corresponding to defs correctly.'
@@ -739,9 +734,6 @@ DefEndAlignment:
   # calls like `private`, `public`, etc, if present in front of the `def`
   # keyword on the same line.
   EnforcedStyleAlignWith: def
-  SupportedStyles:
-    - start_of_line
-    - def
 
 ##################### Rails ##################################
 
@@ -1404,8 +1396,13 @@ Void:
 Rails/Delegate:
   Enabled: false
 
-Style/MultilineOperationIndentation:
+Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
   SupportedStyles:
     - aligned
     - indented
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.gemspec'
+    - 'spec/**/*.rb'
