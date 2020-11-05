@@ -37,7 +37,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "byebug"
   spec.add_development_dependency "fivemat"
-  spec.add_development_dependency "coveralls"
+  spec.add_development_dependency "coveralls_reborn"
 
   spec.add_development_dependency "paperclip", "=6.1.0"
   spec.add_development_dependency "carrierwave", "~> 0.10"
