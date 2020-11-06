@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.3.2] - 2020-11-06
+### Changed
+- Update dependencies with security vulnerabilities detected [Pull Request](https://github.com/xing/pdf_cover/pull/11)
+
 ## [0.3.1] - 2019-11-26
 ### Added
 - Enforce JPEG content type for carrierwave [Pull Request](https://github.com/xing/pdf_cover/pull/10)
