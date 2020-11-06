@@ -62,8 +62,8 @@ module PdfCover
          -dFirstPage=1 -dLastPage=1
          -dGraphicsAlphaBits=#{@antialiasing}
          -r#{@resolution} -q "#{source}"
-         -c quit
-      ).join(" ")
+         -c quit)
+        .join(" ")
     end
 
     def destination_file
