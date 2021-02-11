@@ -11,7 +11,7 @@ module PdfCover
   module ClassMethods
     module CarrierWave
       # When called in the context of a CarrierWave::Uploader::Base subclass,
-      # this method will add a processor to the currenct attachment or version
+      # this method will add a processor to the current attachment or version
       # that generates a JPEG with 95 quality from the first page of the given
       # PDF.
       #
