@@ -2,9 +2,10 @@ language: ruby
 rvm:
   - 2.5.8
   - 2.6.6
+  - 2.7.2
 gemfile:
-  - gemfiles/4.2.gemfile
   - gemfiles/5.0.gemfile
+  - gemfiles/6.0.gemfile
 before_install:
   - gem install bundler -v 1.11.2
   - sudo apt-get -qq update
