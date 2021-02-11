@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.0] - 2021-02-11
+### Breaking change
+- Drop support for Rails 4.x [Pull Request](https://github.com/xing/pdf_cover/pull/12)
+
 ## [0.3.2] - 2020-11-06
 ### Changed
 - Update dependencies with security vulnerabilities detected [Pull Request](https://github.com/xing/pdf_cover/pull/11)
